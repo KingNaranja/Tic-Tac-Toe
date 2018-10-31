@@ -1,1 +1,51 @@
 @import '~bootstrap/scss/bootstrap';
+@import 'colors'; 
+
+
+
+
+body {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background-color: $pale-mellow-red;
+}
+
+h1 {
+    position: static;
+    text-align: center;
+    background-color: $mellow-red;
+
+}
+ 
+main {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+}
+
+
+.gameBoard{
+    display:flex;
+    flex-direction: column;
+    margin: 0 auto;
+
+    .square {
+        display:flex;
+        flex-direction: row;
+        height: 80px;
+        width:80px;
+        border:solid #000;
+        text-align: center;    
+
+    }
+}
+
+footer {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+.name {
+    color: $cool-orange;
+}
