@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Example</title>
+      <title>Tic Tac Toe</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags-->
@@ -12,6 +12,70 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <h1>Browser Template</h1>
+        <header> 
+            <!-- static position  -->
+            <h1>Tic Tac Toe!</h1>
+            <!-- *LASTLY* find cool google fonts for this^?  -->
+        </header>
+
+      <main>  
+        <!-- flexbox with row -->
+        <!-- encapsulates the game area  -->
+          <div id="game-container">
+          <!-- flexbox with columns  -->
+          <!-- space-between -->
+
+            <div id="userForms">
+              <!-- copied from wdi/training/ -->
+              <!-- go back and find how getFormFields works ASAP! -->
+              <!-- forms for login/logout need to be hidden based on user state  -->
+                <form id="sign-up" class="border">
+                    <fieldset>
+                      <legend>Sign-up!</legend>
+                      <input type="text" name="credentials[email]" placeholder="Email"/>
+                      <input type="password" name="credentials[password]" placeholder="password">
+                      <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
+                      <input type="submit" value="Sign Up!"/>
+                    </fieldset>
+                  <form id="sign-in" class="border">
+                    <fieldset>
+                      <legend>Sign-In!</legend>
+                      <input type="text" name="credentials[email]" placeholder="Email"/>
+                      <input type="password" name="credentials[password]" placeholder="password">
+                      <input type="submit" value="Sign In!"/>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div id="gameboard" class="row">
+              <div class="row">
+                <div class="top left square"></div>
+                <div class="top middle square"></div>
+                <div class="top right square"></div>
+              </div>
+              <div class="row">
+                  <div class="middle left square"></div>
+                  <div class="middle square"></div>
+                  <div class="middle right square"></div>
+              </div>
+              <div class="row">
+                  <div class="bottom left square"></div>
+                  <div class="bottom middle square"></div>
+                  <div class="bottom right square"></div>
+              </div>
+            </div>
+        </div>
+        <!-- this button will draw the game board on click -->
+        <!-- need to find a way to only use this button once  -->
+        <button type="button" id="drawBoard"></button>
+        
+        <footer> 
+          <!-- flex column; flex-end; space-between -->
+          <p class="copyright"> Copyright 2017</p>
+          <p class="message">Created with &hearts; by <span class="name">GA</span></p>
+      </footer>
+
+      </main>
     </body>
+    
 </html>
