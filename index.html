@@ -29,6 +29,7 @@
               <!-- copied from wdi/training/ -->
               <!-- go back and find how getFormFields works ASAP! -->
               <!-- forms for login/logout need to be hidden based on user state  -->
+              <!-- replace one field for the other? -->
                 <form id="sign-up" class="border">
                     <fieldset>
                       <legend>Sign-up!</legend>
@@ -46,7 +47,8 @@
                     </fieldset>
                 </form>
             </div>
-
+            
+            <!-- insert into DOM onPlayGame -->
             <div id="gameboard" class="row">
               <div class="row">
                 <div class="top left square"></div>
@@ -67,7 +69,8 @@
         </div>
         <!-- this button will draw the game board on click -->
         <!-- need to find a way to only use this button once  -->
-        <button type="button" id="drawBoard"></button>
+        <!--on document ready -->
+        <button type="button" id="drawBoard"> Play Game! </button>
         
         <footer> 
           <!-- flex column; flex-end; space-between -->
