@@ -6,6 +6,7 @@
 
       <!-- Do not add `link` tags-->
       <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+      <link href="https://fonts.googleapis.com/css?family=Poor+Story" rel="stylesheet">
 
       <!-- Do not add `script` tags-->
       <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
@@ -16,7 +17,7 @@
       <header> 
           <!-- static position  -->
           <h1>Tic Tac Toe!</h1>
-          <!-- *LASTLY* find cool google fonts for this^?  -->
+          
       </header>
 
       <!-- flexbox with row -->
@@ -25,28 +26,39 @@
       <!-- flexbox with columns  -->
       <!-- space-between -->
 
-        <div id="userForms">
+        <div class="userForms">
           <!-- copied from wdi/training/ -->
           <!-- go back and find how getFormFields works ASAP! -->
           <!-- forms for login/logout need to be hidden based on user state  -->
           <!-- replace one field for the other? -->
-            <form id="sign-up" class="border">
+            <form id="sign-up" class="sign-up">
                 <fieldset>
                   <legend>Sign-up!</legend>
                   <input type="text" name="credentials[email]" placeholder="Email"/>
-                  <input type="password" name="credentials[password]" placeholder="password">
+                  <input type="password" name="credentials[password]" placeholder="Password">
                   <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
                   <input type="submit" value="Sign Up!"/>
                 </fieldset>
-              <form id="sign-in" class="border">
+              <form id="sign-in" class="sign-in">
                 <fieldset>
                   <legend>Sign-In!</legend>
                   <input type="text" name="credentials[email]" placeholder="Email"/>
-                  <input type="password" name="credentials[password]" placeholder="password">
+                  <input type="password" name="credentials[password]" placeholder="Password">
                   <input type="submit" value="Sign In!"/>
                 </fieldset>
+                <form id="sign-out" class="sign-out">
+                    <fieldset>
+                      <legend>Sign-out!</legend>
+                      <input type="submit" value="Sign Out!"/>
+                    </fieldset>
             </form>
         </div>
+
+        <!-- this button will draw the game board on click -->
+        <!-- need to find a way to only use this button once  -->
+        <!--on document ready -->
+        <button type="button" id="drawBoard"> Play Game! </button>
+        
         
         <!-- insert into DOM onPlayGame -->
         <div id="game-board" class="gameBoard">
@@ -67,16 +79,11 @@
           </div>
         </div>
       </main>
-        <!-- this button will draw the game board on click -->
-        <!-- need to find a way to only use this button once  -->
-        <!--on document ready -->
-        <button type="button" id="drawBoard"> Play Game! </button>
         
-        <footer> 
-          <!-- flex column; flex-end; space-between -->
-          <p class="copyright"> Copyright 2017</p>
-          <p class="message">Created with &hearts; by <span class="name">Kleide</span></p>
-        </footer>
+      <footer> 
+        <p class="copyright"> Copyright 2017</p>
+        <p class="message">Created with &hearts; by <span class="name">Kleide</span></p>
+      </footer>
 
     </body>
     

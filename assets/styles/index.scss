@@ -1,8 +1,12 @@
 @import '~bootstrap/scss/bootstrap';
 @import 'colors'; 
+@import 'typography';
 
 
 
+* {
+    margin: 0;
+}
 
 body {
     margin: 0 auto;
@@ -11,10 +15,15 @@ body {
     background-color: $pale-mellow-red;
 }
 
-h1 {
+header {
     position: static;
     text-align: center;
     background-color: $mellow-red;
+    padding: 30px 0px;
+    h1 {
+        color: $cool-orange;
+        font-family: $gameFont;
+    }
 
 }
  
@@ -22,6 +31,12 @@ main {
     display: flex;
     flex-direction: column;
     align-content: space-between;
+    button {
+        width: 50%;
+        align-self: center;
+        margin: 20px;
+        color: $mellow-red;
+    }
 }
 
 
@@ -29,23 +44,46 @@ main {
     display:flex;
     flex-direction: column;
     margin: 0 auto;
-
+    padding: 40px;
+     .top {
+        border-bottom: solid #000;
+    }   
+     .right{
+        border-left: solid #000; 
+    }
+     .bottom {
+        border-top : solid #000;
+    }
+     .left {
+        border-right: solid #000;
+    }
     .square {
         display:flex;
         flex-direction: row;
-        height: 80px;
-        width:80px;
-        border:solid #000;
-        text-align: center;    
-
-    }
+        height: 150px;
+        width:150px;
+        text-align: center;     
+     
+    }    
 }
+
 
 footer {
     display: flex;
+    margin-top: 40px;
     flex-direction: row-reverse;
     justify-content: space-between;
 }
 .name {
     color: $cool-orange;
+}
+
+.userForms {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    legend {
+        color: $mellow-red * .8;
+    }
+    
 }
