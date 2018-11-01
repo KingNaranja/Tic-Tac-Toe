@@ -31,7 +31,7 @@
           <!-- go back and find how getFormFields works ASAP! -->
           <!-- forms for login/logout need to be hidden based on user state  -->
           <!-- replace one field for the other? -->
-            <form id="sign-up" class="sign-up">
+            <form id="sign-up" >
                 <fieldset>
                   <legend>Sign-up!</legend>
                   <input type="text" name="credentials[email]" placeholder="Email"/>
@@ -39,29 +39,32 @@
                   <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
                   <input type="submit" value="Sign Up!"/>
                 </fieldset>
-              <form id="sign-in" class="sign-in">
+              <form id="log-in">
                 <fieldset>
-                  <legend>Sign-In!</legend>
+                  <legend>Log-In!</legend>
                   <input type="text" name="credentials[email]" placeholder="Email"/>
                   <input type="password" name="credentials[password]" placeholder="Password">
-                  <input type="submit" value="Sign In!"/>
+                  <input type="submit" value="Log In!"/>
                 </fieldset>
-                <form id="sign-out" class="sign-out">
+                <form id="log-out">
                     <fieldset>
-                      <legend>Sign-out!</legend>
-                      <input type="submit" value="Sign Out!"/>
+                      <legend>Log-out!</legend>
+                      <input type="submit" value="Log Out!"/>
                     </fieldset>
             </form>
         </div>
 
+        <!-- The responses from the api will be placed here. -->
+        <div class='api-response'></div>
+
+
         <!-- this button will draw the game board on click -->
-        <!-- need to find a way to only use this button once  -->
-        <!--on document ready -->
-        <button type="button" id="drawBoard"> Play Game! </button>
+        <button type="button" id="drawBoard"> Play Game ? </button>
         
         
         <!-- insert into DOM onPlayGame -->
-        <div id="game-board" class="gameBoard">
+        <!-- hidden by default;  -->
+        <div id="game-board" class="gameBoard" >
           <div class="row">
             <div class="top left square">1</div>
             <div class="top middle square">2</div>

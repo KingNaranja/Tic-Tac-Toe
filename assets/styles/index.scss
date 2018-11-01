@@ -13,6 +13,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: $pale-mellow-red;
+    justify-items: space-between;
 }
 
 header {
@@ -23,6 +24,7 @@ header {
     h1 {
         color: $cool-orange;
         font-family: $gameFont;
+        letter-spacing: 0.5em;
     }
 
 }
@@ -30,7 +32,7 @@ header {
 main {
     display: flex;
     flex-direction: column;
-    align-content: space-between;
+    //align-content: space-between;
     button {
         width: 50%;
         align-self: center;
@@ -39,12 +41,17 @@ main {
     }
 }
 
+// There is a click event attached this; it executes drawBoard 
+#game-board {
+    display: none;
+}
 
 .gameBoard{
     display:flex;
     flex-direction: column;
     margin: 0 auto;
     padding: 40px;
+   
      .top {
         border-bottom: solid #000;
     }   
@@ -60,19 +67,26 @@ main {
     .square {
         display:flex;
         flex-direction: row;
+        padding: 70px;
         height: 150px;
         width:150px;
-        text-align: center;     
-     
+        font-size: 70px;
+        align-items: center; 
+        text-align: center;    
+        border-radius: 10px;
+        
     }    
 }
 
 
 footer {
     display: flex;
-    margin-top: 40px;
+    flex-shrink: 0;
+    margin: 20px 0px;
+    padding: 40px 20px;
     flex-direction: row-reverse;
     justify-content: space-between;
+ 
 }
 .name {
     color: $cool-orange;
@@ -83,7 +97,7 @@ footer {
     flex-direction: row;
     justify-content: center;
     legend {
-        color: $mellow-red * .8;
+        color: $mellow-red * .8; // a tad darker  
     }
     
 }
