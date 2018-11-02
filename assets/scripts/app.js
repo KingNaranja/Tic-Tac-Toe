@@ -18,7 +18,7 @@ $(() => {
   // attached to the button that says 'Play Game ?'
   $("#drawBoard").on('click', events.drawBoard)
  
-  // store.game is taking over this method 
+  // when a player clicks a spot, makeMove 
   $(".square").on('click', events.makeMove)
 
  

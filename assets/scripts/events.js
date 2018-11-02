@@ -20,7 +20,7 @@ const onSignUp = event => {
 }   
 
 
-//Tic Tac Toe Engine 
+// Tic Tac Toe Engine 
 // helps handle game instances and API responses
 class Game {
     constructor(id, cells, over, player_x={}, player_o=null) {
@@ -42,7 +42,7 @@ class Game {
 
 
 const drawBoard = () => {
-    //toggles hidden attribute of the game board container
+    // toggles hidden attribute of the game board container
     $("#game-board").toggle()
 
     // creates a game instance in the store.js file
@@ -51,18 +51,44 @@ const drawBoard = () => {
 
     // hides the 'Play Game ?' button after it is clicked 
     $('#drawBoard').hide()
+
+    //shows the user Feedback field 
+    $('#message').show()
    
+    // player_ x will always begin the game 
+    // initialize the game feedback field
+    ui.addFeedback("It is X's turn.")
+    
 }
 const makeMove = (square) =>{
+    // playerSpot contains the players choice
+    let playerSpot = square.target
+
+    
+    if (playerSpot.innerText == "X" || playerSpot.innerText == "O" ) { 
+        // if the player clicks on a square 2x
+        // update the user feedback 
+        ui.addFeedback("This spot is already taken. Try another one!")
+        
+    } else {
+        
+        // the square the player clicks will place an ( x / o )
+        playerSpot.innerText = store.currentGame.turn
+
+        // after player chooses a space; switch players
+        // and log feedback
+        switchPlayer()
+        ui.addFeedback(`It is ${store.currentGame.turn}'s turn.`)
+
+    }
+
     // log selected square element to the console
-    console.log(square.target)
-    square.target.innerHTML = store.currentGame.turn
-    //after player chooses a space; switch players
-    switchPlayer()
+    console.log(playerSpot)
+    
 }
 
 const switchPlayer =()=>{
-    //if the game turn is set to 'X', then switch it to 'O'
+    // if the game turn is set to 'X', then switch it to 'O'
     if (store.currentGame.turn == "X") {
         store.currentGame.turn = "O"
     } else {

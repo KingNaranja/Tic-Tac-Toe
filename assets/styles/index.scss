@@ -105,6 +105,7 @@ footer {
 }
 
 #message, #api-response {
+    display: none;
     font-family: $gameFont;
     font-size: 30px;
     color: $mellow-red * .8; // a tad darker
