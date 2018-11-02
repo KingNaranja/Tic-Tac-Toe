@@ -57,8 +57,17 @@ const makeMove = (square) =>{
     // log selected square element to the console
     console.log(square.target)
     square.target.innerHTML = store.currentGame.turn
+    //after player chooses a space; switch players
+    switchPlayer()
+}
 
-
+const switchPlayer =()=>{
+    //if the game turn is set to 'X', then switch it to 'O'
+    if (store.currentGame.turn == "X") {
+        store.currentGame.turn = "O"
+    } else {
+        store.currentGame.turn = "X"
+    }
 }
 
 
@@ -66,5 +75,6 @@ module.exports = {
     onSignUp, 
     Game,
     drawBoard, 
-    makeMove
+    makeMove, 
+    switchPlayer
 }
