@@ -14,14 +14,13 @@ $(() => {
   // $('#log-in').on('submit', events.onLogin)  
   // $('#log-out').on('submit', events.onLogout) 
 
-  
+
   // attached to the button that says 'Play Game ?'
   $("#drawBoard").on('click', events.drawBoard)
  
   // store.game is taking over this method 
-  $("square").on('click', events.makeMove)
+  $(".square").on('click', events.makeMove)
 
  
-
 
 })

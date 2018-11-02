@@ -53,10 +53,18 @@ const drawBoard = () => {
     $('#drawBoard').hide()
    
 }
+const makeMove = (square) =>{
+    // log selected square element to the console
+    console.log(square.target)
+    square.target.innerHTML = store.currentGame.turn
+
+
+}
 
 
 module.exports = {
     onSignUp, 
     Game,
-    drawBoard
+    drawBoard, 
+    makeMove
 }
