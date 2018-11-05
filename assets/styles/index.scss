@@ -112,3 +112,9 @@ footer {
     align-self: center;
 
 }
+
+// this class get added to the tic tac toe squares 
+// when the game ends 
+.gameOver {
+    pointer-events: none;
+}

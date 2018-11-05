@@ -30,6 +30,7 @@ class Game {
         this.player_x = player_x
         this.player_o = player_o
         this.turn = "X"
+        this.winConditions = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [6,4,2]]
     }
     // create a new game instance in the store 
     newGame() {
@@ -52,15 +53,35 @@ class Game {
         
         // logs the cells array in the currentGame object 
         console.log(store.currentGame.cells)
-        
-        
+  
+    }
+    //returns the array that contains recorded player moves 
+    getCells() {
+        return this.cells
     }
     
+    endGame() {
+        // change the 'over' property of the current game to True 
+        store.currentGame.over = true
+
+        // add a class to game squares to stop click events 
+        $('.square').addClass('gameOver')
+        console.log('The Game is now over')
+
+        // reset the inner text of each game square 
+        $('.square').text('')
+
+        //adds the 'play game button back to the page; slowly
+        $("#drawBoard").toggle("slow")
+        
+    
+    }
     
 }
 
 
 const drawBoard = () => {
+
     // toggles hidden attribute of the game board container
     $("#game-board").toggle()
 
@@ -94,22 +115,28 @@ const makeMove = (square) =>{
         // the square the player clicks will place an ( x / o )
         playerSpot.innerText = store.currentGame.turn
 
-        // Store the cell index of the players choice 
+        // Game stores the cell index of the players choice 
         store.currentGame.storePlayerMove(playerSpot)
 
-        // after player chooses a space; switch players
-        // and log feedback
-        switchPlayer()
-        ui.addFeedback(`It is ${store.currentGame.turn}'s turn.`)
+        //check if player move meets win condition
+        if (checkForWinner()) {
+            store.currentGame.endGame()
+            console.log('I should not see this')
+        } else {
+            // after player chooses a space, if game hasnt ended; switch players
+            // and log feedback
+            switchPlayer()
+            ui.addFeedback(`It is ${store.currentGame.turn}'s turn.`)
 
-        //store player_x move in store.currentGame
+        }
+        
+
+
 
     }
-
     // log selected square element to the console
     console.log(playerSpot)
-    //check if player move meets win condition
-    checkForMatch()
+
 }
 
 const switchPlayer =()=>{
@@ -121,25 +148,20 @@ const switchPlayer =()=>{
     }
 }
 
-const checkForMatch = function() {
-    const $topRow = $('.top')
-    const $middleRow = $('.middle')
-    const $bottomRow = $('.bottom')
-    const $leftCol = $('.left')
-    const $rightCol = $('.right')
-    const board = [$topRow,$middleRow,$bottomRow,$leftCol,$rightCol]
-    board.forEach(checkWin)
-    
-}
-
-const checkWin = ($row) => {
-    //if the checked row all contains player classes; then that player wins 
-    if ($row.hasClass(`${store.currentGame.turn}`)){
-        console.log(`${store.currentGame.turn} wins !`)
+const checkForWinner = function() { 
+    if (store.currentGame.winConditions.some(function(checkRow)  {
+        return checkRow.every(function(playerSpot) {
+            let boardInPlay = store.currentGame.getCells()
+            return boardInPlay[playerSpot] === store.currentGame.turn
+            })
+        })
+    ){
+        console.log( `${store.currentGame.turn} wins !`)
+        ui.addFeedback(`${store.currentGame.turn} Wins !`)
+        return true
+        
     }
-   
-}
-
+}    
 
 
 module.exports = {
@@ -148,6 +170,6 @@ module.exports = {
     drawBoard, 
     makeMove, 
     switchPlayer,
-    checkForMatch,
-    checkWin
+    checkForWinner
+    
 }
