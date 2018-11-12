@@ -118,6 +118,10 @@ footer {
 .gameOver {
     pointer-events: none;
 }
+// this buttton will only appear after player plays at least one game 
+#playAgain {
+    display: none;
+}
 
 #log-out {
     display: none;

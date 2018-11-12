@@ -20,11 +20,17 @@ const onSignUp = event => {
 }   
 
 
+// gameCount must keep track of how many times a new game is played
+// gameCount will be assigned to the current game ID
+// Initilized at 1 
+
+let gameCount = 1
+
 // Tic Tac Toe Engine 
 // helps handle game instances and API responses
 class Game {
-    constructor(id, over, player_x={}, player_o=null) {
-        this.id = id 
+    constructor(over, player_x={}, player_o=null) {
+        this.id = gameCount 
         this.cells = ["","","","","","","","",""] 
         this.over = over
         this.player_x = player_x
@@ -34,14 +40,14 @@ class Game {
     }
     // create a new game instance in the store 
     newGame() {
-        let gameCount = store.currentGame.id
+        // each newGame call will increment the gameCount
         // player_ x by default is an empty object > form field method not done
-        store.currentGame = new Game(`${gameCount++}`,false)
+        store.currentGame = new Game(gameCount++,false)
     }
 
-    // will grab the data of the player spot 
+    // grab the data of the player spot 
     // add a player class to that element 
-    // and store the player move in the current game  
+    // stores the player move in the current game  
     storePlayerMove(playerSpot) {
         let spotClasses = playerSpot.classList
         spotClasses.add(`${store.currentGame.turn}`)
@@ -69,38 +75,24 @@ class Game {
         $('.square').addClass('gameOver')
         console.log('The Game is now over')
 
-        // reset the inner text of each game square 
-        $('.square').text('')
-
         //adds the 'play game button back to the page; slowly
-        $("#drawBoard").toggle("slow")
+        $("#playAgain").toggle("slow")
         
     }
-    // game will   
-    resetBoard () {
-
-    }
+    
 }
+
 
 
 const drawBoard = () => {
 
-    // if the squares have a 'game over class
-    // instead of toggling gameboard, 
-    //  > remove the  game over class
-    // else , continue as normal 
     
-
-
-
-
-
-
     // toggles hidden attribute of the game board container
-    $("#game-board").toggle()
+    $(".gameBoard").toggle()
 
+    
     // creates a game instance in the store.js file
-    store.currentGame = new Game(1,[],false)
+    store.currentGame = new Game(false)
     console.log(store.currentGame)
 
     // hides the 'Play Game ?' button after it is clicked 
@@ -108,10 +100,11 @@ const drawBoard = () => {
 
     //shows the user Feedback field 
     $('#message').show()
-   
+
     // player_ x will always begin the game 
     // initialize the game feedback field
     ui.addFeedback("It is X's turn.")
+
     
 }
 
@@ -167,7 +160,7 @@ const switchPlayer =()=>{
     }
 }
 
-const checkForWinner = function() { 
+const checkForWinner =()=> { 
     
     // winConditions.some() will return true if 
     if (store.currentGame.winConditions.some(function(checkRow)  {
@@ -200,6 +193,27 @@ const checkTieGame = () => {
     }  return true
 }    
 
+const onPlayAgain = () => {
+
+    // reset the inner text of each game square 
+    $('.square').text('')
+
+    // remove the 'gameOver' class to enable to gameboard
+    $(".square").removeClass("gameOver")
+
+    // create a new game instance
+    store.currentGame.newGame()
+
+    // hide the 'play Again' button
+    $("#playAgain").toggle("slow")
+
+    
+    // Let player x know it is his turn again
+    ui.addFeedback(`It is ${store.currentGame.turn} turn!`)
+    
+    console.log(store.currentGame.id)
+
+}
 module.exports = {
     onSignUp, 
     Game,
@@ -207,6 +221,7 @@ module.exports = {
     makeMove, 
     switchPlayer,
     checkForWinner,
-    checkTieGame
+    checkTieGame, 
+    onPlayAgain
     
 }

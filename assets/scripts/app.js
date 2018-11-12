@@ -16,11 +16,14 @@ $(() => {
 
 
   // attached to the button that says 'Play Game ?'
+  // adds board; starts game 
   $("#drawBoard").on('click', events.drawBoard)
  
   // when a player clicks a spot, makeMove 
   $(".square").on('click', events.makeMove)
 
- 
+  // attached to the button that says 'Play Again!'
+  // resets the board and starts a new game 
+  $("#playAgain").on('click', events.onPlayAgain)
 
 })
