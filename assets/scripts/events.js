@@ -25,7 +25,7 @@ const onSignUp = event => {
 class Game {
     constructor(id, over, player_x={}, player_o=null) {
         this.id = id 
-        this.cells = [] 
+        this.cells = ["","","","","","","","",""] 
         this.over = over
         this.player_x = player_x
         this.player_o = player_o
@@ -35,6 +35,7 @@ class Game {
     // create a new game instance in the store 
     newGame() {
         let gameCount = store.currentGame.id
+        // player_ x by default is an empty object > form field method not done
         store.currentGame = new Game(`${gameCount++}`,false)
     }
 
@@ -55,7 +56,7 @@ class Game {
         console.log(store.currentGame.cells)
   
     }
-    //returns the array that contains recorded player moves 
+    // returns the array that contains recorded player moves 
     getCells() {
         return this.cells
     }
@@ -74,13 +75,26 @@ class Game {
         //adds the 'play game button back to the page; slowly
         $("#drawBoard").toggle("slow")
         
-    
     }
-    
+    // game will   
+    resetBoard () {
+
+    }
 }
 
 
 const drawBoard = () => {
+
+    // if the squares have a 'game over class
+    // instead of toggling gameboard, 
+    //  > remove the  game over class
+    // else , continue as normal 
+    
+
+
+
+
+
 
     // toggles hidden attribute of the game board container
     $("#game-board").toggle()
@@ -100,17 +114,18 @@ const drawBoard = () => {
     ui.addFeedback("It is X's turn.")
     
 }
+
 const makeMove = (square) =>{
     // playerSpot contains the players choice
     let playerSpot = square.target
 
-    
+    // if the player clicks on a square that has been already been taken
+    // update the user feedback 
     if (playerSpot.innerText == "X" || playerSpot.innerText == "O" ) { 
-        // if the player clicks on a square that has been already been taken
-        // update the user feedback 
+        
         ui.addFeedback("This spot is already taken. Try another one!")
         
-    } else {
+    } else { 
         
         // the square the player clicks will place an ( x / o )
         playerSpot.innerText = store.currentGame.turn
@@ -121,8 +136,12 @@ const makeMove = (square) =>{
         //check if player move meets win condition
         if (checkForWinner()) {
             store.currentGame.endGame()
-            console.log('I should not see this')
-        } else {
+        // check if the game is a Tie 
+        } else if (checkTieGame()){
+            ui.addFeedback("It is TIE GAME! ")
+            store.currentGame.endGame()
+
+        }else { 
             // after player chooses a space, if game hasnt ended; switch players
             // and log feedback
             switchPlayer()
@@ -131,11 +150,11 @@ const makeMove = (square) =>{
         }
         
 
-
-
     }
     // log selected square element to the console
     console.log(playerSpot)
+    console.log(store.currentGame.getCells())
+    
 
 }
 
@@ -149,8 +168,12 @@ const switchPlayer =()=>{
 }
 
 const checkForWinner = function() { 
+    
+    // winConditions.some() will return true if 
     if (store.currentGame.winConditions.some(function(checkRow)  {
+        // .every playerSpot stored in the current game 
         return checkRow.every(function(playerSpot) {
+            // contains the same player turn mark  x / o
             let boardInPlay = store.currentGame.getCells()
             return boardInPlay[playerSpot] === store.currentGame.turn
             })
@@ -158,11 +181,24 @@ const checkForWinner = function() {
     ){
         console.log( `${store.currentGame.turn} wins !`)
         ui.addFeedback(`${store.currentGame.turn} Wins !`)
-        return true
-        
-    }
+        return true  
+    }       
+    
 }    
 
+const checkTieGame = () => {
+    // for every gameboard cell
+    for (let i = 0 ; i < 10 ; i++)  {
+        // let gameMoves hold the current game cells
+        let gameMoves = store.currentGame.getCells()
+
+        // if current game cell is empty return false 
+        if (gameMoves[i] == "") {
+            return false
+        }
+        // after the above condition fails, return true
+    }  return true
+}    
 
 module.exports = {
     onSignUp, 
@@ -170,6 +206,7 @@ module.exports = {
     drawBoard, 
     makeMove, 
     switchPlayer,
-    checkForWinner
+    checkForWinner,
+    checkTieGame
     
 }
