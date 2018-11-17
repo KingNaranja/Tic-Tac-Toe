@@ -6,6 +6,8 @@ const ui = require('./ui.js')
 const store = require('./store.js')
 
 const onSignUp = event => {
+    // shows the api message field
+    $('#api-response').show()
     // prevents submit button from refreshing the page
     event.preventDefault() 
     console.log(event.target) //logs the element the submit event is targeting 
@@ -19,11 +21,29 @@ const onSignUp = event => {
         .catch(ui.signUpFailure) // if failure
 }   
 
+const onSignIn = event => {
+    // prevents submit button from refreshing the page
+    event.preventDefault() 
+    console.log(console.log(event.target) )// logs the element the submit event is targeting 
+
+    let data = getFormFields(event.target)
+    api.signIn(data)
+        .then(ui.signInSuccess) // if successfull
+        .catch(ui.signInFailure) // if failure
+}
+
+const onSignOut = event => {
+    event.preventDefault()
+    api.signOut()
+      .then(ui.signOutSuccess)
+      .catch(ui.signOutFailure)
+  }
+
+
 
 // gameCount must keep track of how many times a new game is played
 // gameCount will be assigned to the current game ID
 // Initilized at 1 
-
 let gameCount = 1
 
 // Tic Tac Toe Engine 
@@ -86,12 +106,10 @@ class Game {
 
 const drawBoard = () => {
 
-    
-    // toggles hidden attribute of the game board container
+    // toggles hidden display of the game board container
     $(".gameBoard").toggle()
-
     
-    // creates a game instance in the store.js file
+    // creates a game instance in store.js 
     store.currentGame = new Game(false)
     console.log(store.currentGame)
 
@@ -136,13 +154,11 @@ const makeMove = (square) =>{
 
         }else { 
             // after player chooses a space, if game hasnt ended; switch players
-            // and log feedback
+            // and update feedback
             switchPlayer()
             ui.addFeedback(`It is ${store.currentGame.turn}'s turn.`)
-
         }
-        
-
+    
     }
     // log selected square element to the console
     console.log(playerSpot)
@@ -172,7 +188,7 @@ const checkForWinner =()=> {
             })
         })
     ){
-        console.log( `${store.currentGame.turn} wins !`)
+        // update UI => player x / o wins
         ui.addFeedback(`${store.currentGame.turn} Wins !`)
         return true  
     }       
@@ -207,15 +223,14 @@ const onPlayAgain = () => {
     // hide the 'play Again' button
     $("#playAgain").toggle("slow")
 
-    
     // Let player x know it is his turn again
     ui.addFeedback(`It is ${store.currentGame.turn} turn!`)
     
-    console.log(store.currentGame.id)
-
 }
 module.exports = {
-    onSignUp, 
+    onSignUp,
+    onSignIn, 
+    onSignOut,
     Game,
     drawBoard, 
     makeMove, 

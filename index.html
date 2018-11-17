@@ -31,7 +31,7 @@
           <!-- go back and find how getFormFields works ASAP! -->
           <!-- forms for login/logout need to be hidden based on user state  -->
           <!-- replace one field for the other? -->
-            <form id="sign-up" >
+            <form id= "sign-up">
                 <fieldset>
                   <legend>Sign-up!</legend>
                   <input type="text" name="credentials[email]" placeholder="Email"/>
@@ -39,18 +39,20 @@
                   <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
                   <input type="submit" value="Sign Up!"/>
                 </fieldset>
-              <form id="log-in">
+            </form>
+            <form id= "sign-in">
                 <fieldset>
                   <legend>Log-In!</legend>
                   <input type="text" name="credentials[email]" placeholder="Email"/>
                   <input type="password" name="credentials[password]" placeholder="Password">
                   <input type="submit" value="Log In!"/>
                 </fieldset>
-                <form id="log-out">
-                    <fieldset>
-                      <legend>Log-out!</legend>
-                      <input type="submit" value="Log Out!"/>
-                    </fieldset>
+            </form>
+            <form id= "sign-out">
+                <fieldset>
+                  <legend>Log-out!</legend>
+                  <input type="submit" value="Log Out!"/>
+                </fieldset>
             </form>
         </div>
 

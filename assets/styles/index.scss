@@ -97,7 +97,7 @@ footer {
 .userForms {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     legend {
         color: $mellow-red * .8; // a tad darker  
     }
@@ -111,6 +111,13 @@ footer {
     color: $mellow-red * .8; // a tad darker
     align-self: center;
 
+    &.success {
+        background-color: rgb(138, 138, 212);
+        
+      }
+      &.failure {
+        background-color: rgb(123, 123, 139);
+      }
 }
 
 // this class get added to the tic tac toe squares 
@@ -122,7 +129,9 @@ footer {
 #playAgain {
     display: none;
 }
-
-#log-out {
+// hidden by default
+#sign-out {
     display: none;
 }
+
+

@@ -11,8 +11,8 @@ const events = require('./events.js')
 $(() => {
 
   $("#sign-up").on('submit', events.onSignUp)  
-  // $('#log-in').on('submit', events.onLogin)  
-  // $('#log-out').on('submit', events.onLogout) 
+  $('#sign-in').on('submit', events.onSignIn)  
+  $('#sign-out').on('submit', events.onSignOut) 
 
 
   // attached to the button that says 'Play Game ?'
