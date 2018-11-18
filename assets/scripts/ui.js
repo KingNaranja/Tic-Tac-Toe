@@ -56,6 +56,8 @@ const signInSuccess = data => {
     $('#sign-up').toggle()
     $('#sign-in').toggle()
     $('#sign-out').toggle("slow")
+    $('#change-password').toggle("slow")
+
 
 
 }
@@ -83,6 +85,7 @@ const signOutSuccess = data => {
     $('#sign-up').toggle('slow')
     $('#sign-in').toggle('slow')
     $('#sign-out').toggle()
+    $('#change-password').toggle()
     $('#drawBoard').hide()
 
     // in case user logs out mid game
@@ -102,6 +105,22 @@ const signOutSuccess = data => {
     addResponse('Error on sign out')
   }
 
+  const changePasswordSuccess = data => {
+    addResponse('Password changed successfully')
+
+    $('#message').removeClass()
+    $('#message').addClass('success')
+    console.log('changePasswordSuccess ran. Data is :', data)
+  }
+  
+  const changePasswordFailure = error => {
+    addResponse('Error on password change')
+
+    $('#message').removeClass()
+    $('#message').addClass('failure')
+    console.error('changePasswordFailure ran. Error is :', error)
+  }
+
 module.exports = {
     addFeedback,
     signUpSuccess,
@@ -109,6 +128,8 @@ module.exports = {
     signInSuccess,
     signInFailure,
     signOutSuccess,
-    signOutFailure
+    signOutFailure,
+    changePasswordSuccess,
+    changePasswordFailure
 
 }
