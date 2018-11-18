@@ -30,6 +30,8 @@ const onSignIn = event => {
     api.signIn(data)
         .then(ui.signInSuccess) // if successfull
         .catch(ui.signInFailure) // if failure
+
+
 }
 
 const onSignOut = event => {
@@ -93,7 +95,7 @@ class Game {
 
         // add a class to game squares to stop click events 
         $('.square').addClass('gameOver')
-        console.log('The Game is now over')
+        ui.addFeedback('The Game is now over')
 
         //adds the 'play game button back to the page; slowly
         $("#playAgain").toggle("slow")
@@ -108,6 +110,9 @@ const drawBoard = () => {
 
     // toggles hidden display of the game board container
     $(".gameBoard").toggle()
+
+    // enable gameBoard
+    $(".square").removeClass("gameOver")
     
     // creates a game instance in store.js 
     store.currentGame = new Game(false)
@@ -163,6 +168,7 @@ const makeMove = (square) =>{
     // log selected square element to the console
     console.log(playerSpot)
     console.log(store.currentGame.getCells())
+    
     
 
 }

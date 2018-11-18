@@ -7,8 +7,13 @@ const addFeedback = (message) =>{
     // will update the message div with the appropriate response 
 }
 const addResponse = (message) => {
-    $('#api-response').text(message)
     // updates page with user status
+    $('#api-response').toggle()
+    $('#api-response').text(message)
+    // hide response after 2 seconds 
+    setTimeout(()=>{
+        $('#api-response').toggle()
+        },2000)
 }
 
 const signUpSuccess = data => {
@@ -16,9 +21,12 @@ const signUpSuccess = data => {
     //attach success class to our status message 
     $('#api-response').removeClass()
     $('#api-response').addClass('success')
+
     // success response
     addResponse('You Signed In Successfully!')
     
+    
+
 }
 
 const signUpFailure = data => {
@@ -33,7 +41,7 @@ const signUpFailure = data => {
 
 
 const signInSuccess = data => {
-    store.currentGame.user = data.user
+    store.userData = data.user
 
     console.log('signInSuccess ran. Data is:', data)
     //attach success class to our status message 
@@ -41,6 +49,15 @@ const signInSuccess = data => {
     $('#message').addClass('#success')
     // success response 
     addResponse('Thanks for logging in!')
+    // Once user is online, the user can start the game 
+    $('#drawBoard').toggle()
+
+    // hide the sign-up fieldset
+    $('#sign-up').toggle()
+    $('#sign-in').toggle()
+    $('#sign-out').toggle("slow")
+
+
 }
 
 const signInFailure = data => {
@@ -61,6 +78,19 @@ const signOutSuccess = data => {
     console.log('signOutSuccess ran. Data is :', data)
 
     addResponse('Signed out successfully')
+
+    // return back to initital view 
+    $('#sign-up').toggle('slow')
+    $('#sign-in').toggle('slow')
+    $('#sign-out').toggle()
+    $('#drawBoard').hide()
+
+    // in case user logs out mid game
+    store.currentGame.endGame()
+    $('#playAgain').hide()
+    $('.square').text('')
+    $('.gameBoard').hide()
+    
   }
 
   const signOutFailure = error => {

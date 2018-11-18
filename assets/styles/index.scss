@@ -126,7 +126,7 @@ footer {
     pointer-events: none;
 }
 // this buttton will only appear after player plays at least one game 
-#playAgain {
+#playAgain, #drawBoard {
     display: none;
 }
 // hidden by default

@@ -20,15 +20,17 @@ const signIn = data => {
     })
   }
 
-  const signOut = () => {
+const signOut = () => {
+    let user = store.userData
+    
     return $.ajax({
-      url: config.apiUrl + '/sign-out',
-      method: 'DELETE',
-      headers: {
-        Authorization: 'Token token=' + store.currentGame.user.token
-      }
+    url: config.apiUrl + '/sign-out',
+    method: 'DELETE',
+    headers: {
+        Authorization: 'Token token=' + user.token
+    }
     })
-  }
+}
 module.exports = {
     signUp,
     signIn,
