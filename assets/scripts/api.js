@@ -34,7 +34,7 @@ const signOut = () => {
 
 const changePassword = data => {
     let user = store.userData
-    
+
     return $.ajax({
       url: config.apiUrl + '/change-password',
       method: 'PATCH',
@@ -44,9 +44,39 @@ const changePassword = data => {
       data
     })
   }
+
+  const updateMove = moveData => {
+    let user = store.userData
+    console.log(moveData)
+    return $.ajax({
+        url: config.apiUrl + 'games/' + store.currentGame.id,
+        method: 'PATCH',
+        headers: {
+          Authorization: 'Token token=' + user.token
+        },
+        moveData
+      })
+  }
+
+  const createGame = () => {
+    let user = store.userData
+    return $.ajax({
+        url: config.apiUrl + '/games',
+        method: 'POST',
+        headers: {
+          Authorization: 'Token token=' + user.token
+        },
+        
+      })
+  }
+
+
 module.exports = {
     signUp,
     signIn,
     signOut,
-    changePassword
+    changePassword,
+    updateMove,
+    createGame,
+
 }

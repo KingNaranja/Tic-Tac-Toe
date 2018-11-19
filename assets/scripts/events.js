@@ -54,13 +54,13 @@ const onSignOut = event => {
 // gameCount must keep track of how many times a new game is played
 // gameCount will be assigned to the current game ID
 // Initilized at 1 
-let gameCount = 1
+let gameCount = 0
 
 // Tic Tac Toe Engine 
 // helps handle game instances and API responses
 class Game {
-    constructor(over, player_x={}, player_o=null) {
-        this.id = gameCount 
+    constructor(id=gameCount,over, player_x=store.userData, player_o=null) {
+        this.id = id 
         this.cells = ["","","","","","","","",""] 
         this.over = over
         this.player_x = player_x
@@ -72,7 +72,13 @@ class Game {
     newGame() {
         // each newGame call will increment the gameCount
         // player_ x by default is an empty object > form field method not done
-        store.currentGame = new Game(gameCount++,false)
+        gameCount++
+        store.currentGame = new Game(gameCount,false)
+
+        
+        api.createGame()  
+          .then(console.log('made a game'))
+          .catch(console.log('cant make a game'))
     }
 
     // grab the data of the player spot 
@@ -90,7 +96,8 @@ class Game {
         
         // logs the cells array in the currentGame object 
         console.log(store.currentGame.cells)
-  
+        
+        return playerMove
     }
     // returns the array that contains recorded player moves 
     getCells() {
@@ -109,6 +116,25 @@ class Game {
         $("#playAgain").toggle("slow")
         
     }
+  
+    updateGame(playerSpot) {
+        // playerMove contains the index of the selected sqaure
+        let playerMove = playerSpot.getAttribute("data-cell")
+
+        let turn = store.currentGame.turn.toLowerCase()
+        let gameData = {
+            "game": {
+              "cell": {
+                "index": parseInt(playerMove),
+                "value": `${turn}`
+              },
+              "over": store.currentGame.over
+            }
+          }
+          api.updateMove(gameData)
+             
+            console.log(gameData)
+    }
     
 }
 
@@ -123,7 +149,9 @@ const drawBoard = () => {
     $(".square").removeClass("gameOver")
     
     // creates a game instance in store.js 
-    store.currentGame = new Game(false)
+    store.currentGame = new Game(gameCount,false)
+    store.currentGame.newGame()
+    
     console.log(store.currentGame)
 
     // hides the 'Play Game ?' button after it is clicked 
@@ -135,7 +163,7 @@ const drawBoard = () => {
     // player_ x will always begin the game 
     // initialize the game feedback field
     ui.addFeedback("It is X's turn.")
-
+    
     
 }
 
@@ -157,21 +185,28 @@ const makeMove = (square) =>{
         // Game stores the cell index of the players choice 
         store.currentGame.storePlayerMove(playerSpot)
 
+        // update the state of the game
+        store.currentGame.updateGame(playerSpot)
+
         //check if player move meets win condition
         if (checkForWinner()) {
             store.currentGame.endGame()
         // check if the game is a Tie 
+            // update the state of the game
+            store.currentGame.updateGame(playerSpot)
         } else if (checkTieGame()){
             ui.addFeedback("It is TIE GAME! ")
             store.currentGame.endGame()
-
+            // update the state of the game
+            store.currentGame.updateGame(playerSpot)
         }else { 
             // after player chooses a space, if game hasnt ended; switch players
             // and update feedback
             switchPlayer()
             ui.addFeedback(`It is ${store.currentGame.turn}'s turn.`)
         }
-    
+        
+        
     }
     // log selected square element to the console
     console.log(playerSpot)
@@ -241,6 +276,8 @@ const onPlayAgain = () => {
     ui.addFeedback(`It is ${store.currentGame.turn} turn!`)
     
 }
+
+
 module.exports = {
     onSignUp,
     onSignIn, 

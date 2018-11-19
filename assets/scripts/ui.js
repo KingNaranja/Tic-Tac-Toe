@@ -58,6 +58,7 @@ const signInSuccess = data => {
     $('#sign-out').toggle("slow")
     $('#change-password').toggle("slow")
 
+    $('.getGames').toggle()
 
 
 }
@@ -120,6 +121,9 @@ const signOutSuccess = data => {
     $('#message').addClass('failure')
     console.error('changePasswordFailure ran. Error is :', error)
   }
+
+
+
 
 module.exports = {
     addFeedback,
