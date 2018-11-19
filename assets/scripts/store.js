@@ -4,6 +4,10 @@ const currentGame  = {
     
 }
 
+const userData = {
+
+}
 module.exports = {
-    currentGame
+    currentGame,
+    userData
 } 

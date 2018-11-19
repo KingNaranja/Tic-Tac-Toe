@@ -97,20 +97,27 @@ footer {
 .userForms {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     legend {
         color: $mellow-red * .8; // a tad darker  
     }
     
 }
 
-#message, #api-response {
+#message, #api-response, {
     display: none;
     font-family: $gameFont;
     font-size: 30px;
     color: $mellow-red * .8; // a tad darker
     align-self: center;
 
+    &.success {
+        background-color: rgb(138, 138, 212);
+        
+      }
+      &.failure {
+        background-color: rgb(123, 123, 139);
+      }
 }
 
 // this class get added to the tic tac toe squares 
@@ -118,7 +125,13 @@ footer {
 .gameOver {
     pointer-events: none;
 }
-
-#log-out {
+// this buttton will only appear after player plays at least one game 
+#playAgain, #drawBoard {
     display: none;
 }
+// hidden by default
+#sign-out, #change-password {
+    display: none;
+}
+
+
