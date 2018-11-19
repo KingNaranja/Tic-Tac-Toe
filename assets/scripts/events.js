@@ -10,11 +10,10 @@ const onSignUp = event => {
     $('#api-response').show()
     // prevents submit button from refreshing the page
     event.preventDefault() 
-    console.log(event.target) //logs the element the submit event is targeting 
+    
 
     let data = getFormFields(event.target)
     // logs the form data to the console
-    console.log('The sign-up data is', data)
 
     api.signUp(data)
         .then(ui.signUpSuccess) // if successfull
@@ -24,7 +23,7 @@ const onSignUp = event => {
 const onSignIn = event => {
     // prevents submit button from refreshing the page
     event.preventDefault() 
-    console.log(console.log(event.target) )// logs the element the submit event is targeting 
+     
 
     let data = getFormFields(event.target)
     api.signIn(data)
@@ -77,8 +76,7 @@ class Game {
 
         
         api.createGame()  
-          .then(console.log('made a game'))
-          .catch(console.log('cant make a game'))
+
     }
 
     // grab the data of the player spot 
@@ -94,8 +92,6 @@ class Game {
         // stores the playerMove in the current index of the currentGame cell storage
         this.cells[playerMove] = store.currentGame.turn
         
-        // logs the cells array in the currentGame object 
-        console.log(store.currentGame.cells)
         
         return playerMove
     }
@@ -133,7 +129,7 @@ class Game {
           }
           api.updateMove(gameData)
              
-            console.log(gameData)
+            
     }
     
 }
@@ -152,7 +148,7 @@ const drawBoard = () => {
     store.currentGame = new Game(gameCount,false)
     store.currentGame.newGame()
     
-    console.log(store.currentGame)
+    
 
     // hides the 'Play Game ?' button after it is clicked 
     $('#drawBoard').hide()
@@ -208,9 +204,6 @@ const makeMove = (square) =>{
         
         
     }
-    // log selected square element to the console
-    console.log(playerSpot)
-    console.log(store.currentGame.getCells())
     
     
 

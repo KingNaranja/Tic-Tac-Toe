@@ -4,7 +4,7 @@ const config = require('./config.js')
 const store = require('./store.js')
 
 const signUp = data => {
-    console.log("in signup data is", data)
+    
     return $.ajax ({
         url: config.apiUrl + '/sign-up',
         method: 'POST',
@@ -47,7 +47,7 @@ const changePassword = data => {
 
   const updateMove = moveData => {
     let user = store.userData
-    console.log(moveData)
+    
     return $.ajax({
         url: config.apiUrl + 'games/' + store.currentGame.id,
         method: 'PATCH',

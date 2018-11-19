@@ -17,7 +17,7 @@ const addResponse = (message) => {
 }
 
 const signUpSuccess = data => {
-    console.log('signUpSuccess ran. Data is:', data)
+    
     //attach success class to our status message 
     $('#api-response').removeClass()
     $('#api-response').addClass('success')
@@ -30,7 +30,7 @@ const signUpSuccess = data => {
 }
 
 const signUpFailure = data => {
-    console.log('signUpFailure ran. Error is:', data)
+    
     //attach failure to our status message 
     $('#message').removeClass()
     $('#message').addClass('#failure')
@@ -43,7 +43,7 @@ const signUpFailure = data => {
 const signInSuccess = data => {
     store.userData = data.user
 
-    console.log('signInSuccess ran. Data is:', data)
+    
     //attach success class to our status message 
     $('#message').removeClass()
     $('#message').addClass('#success')
@@ -65,7 +65,7 @@ const signInSuccess = data => {
 
 const signInFailure = data => {
     
-    console.log('signInFailure ran. Error is:', data)
+    
     //attach failure to our status message 
     $('#message').removeClass()
     $('#message').addClass('#failure')
@@ -78,7 +78,7 @@ const signOutSuccess = data => {
     store.currentGame.user = null
     $('#message').removeClass()
     $('#message').addClass('success')
-    console.log('signOutSuccess ran. Data is :', data)
+    
 
     addResponse('Signed out successfully')
 
@@ -111,7 +111,7 @@ const signOutSuccess = data => {
 
     $('#message').removeClass()
     $('#message').addClass('success')
-    console.log('changePasswordSuccess ran. Data is :', data)
+    
   }
   
   const changePasswordFailure = error => {
@@ -119,7 +119,7 @@ const signOutSuccess = data => {
 
     $('#message').removeClass()
     $('#message').addClass('failure')
-    console.error('changePasswordFailure ran. Error is :', error)
+    
   }
 
 
