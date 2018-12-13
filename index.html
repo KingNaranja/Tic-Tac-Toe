@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Tic Tac Toe</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+      <link href="https://fonts.googleapis.com/css?family=Poor+Story" rel="stylesheet">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body>
+    
+      <header> 
+          <!-- static position  -->
+          <h1>Tic Tac Toe!</h1>
+          
+      </header>
+
+      <!-- flexbox with row -->
+      <!-- encapsulates the game area  -->
+      <main id="game-container">
+      <!-- flexbox with columns  -->
+      <!-- space-between -->
+
+        <div class="userForms">
+          <!-- copied from wdi/training/ -->
+          <!-- go back and find how getFormFields works ASAP! -->
+          <!-- forms for login/logout need to be hidden based on user state  -->
+          <!-- replace one field for the other? -->
+            <form id= "sign-up">
+                <fieldset>
+                  <legend>Sign-up!</legend>
+                  <input type="text" name="credentials[email]" placeholder="Email"/>
+                  <input type="password" name="credentials[password]" placeholder="Password">
+                  <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
+                  <input type="submit" value="Sign Up!"/>
+                </fieldset>
+            </form>
+            <form id= "sign-in">
+                <fieldset>
+                  <legend>Log-In!</legend>
+                  <input type="text" name="credentials[email]" placeholder="Email"/>
+                  <input type="password" name="credentials[password]" placeholder="Password">
+                  <input type="submit" value="Log In!"/>
+                </fieldset>
+            </form>
+            <form id= "sign-out">
+                <fieldset>
+                  <legend>Log-out!</legend>
+                  <input type="submit" value="Log Out!"/>
+                </fieldset>
+            </form>
+            <form id="change-password">
+              <fieldset>
+                <legend>Change password?</legend>
+                <input type="password" name="passwords[old]" placeholder="Old password">
+                <input type="password" name="passwords[new]" placeholder="New password">
+                <input type="submit" value="Change password!">
+              </fieldset>
+           </form>
+        </div>
+
+        <!-- The responses from the api will be placed here. -->
+        <div id='api-response'> API RESPONSE HERE</div>
+
+
+        <!-- this button will draw the game board on click -->
+        <button type="button" id="drawBoard"> Play Game ? </button>
+        <!-- this button will start another game -->
+        <button type="button" id="playAgain"> Play Again! </button>
+
+        <!-- This message is used for game feedback -->
+        <div id="message" >USER FEEDBACK MESSAGE</div>
+        
+        
+        <!-- insert into DOM onPlayGame -->
+        <!-- hidden by default;  -->
+        <div id="game-board" class="gameBoard" >
+          <div class="row">
+            <div class="top left square" data-cell="0"></div>
+            <div class="top middle square" data-cell="1"></div>
+            <div class="top right square" data-cell="2"></div>
+          </div>
+          <div class="row">
+              <div class="middle left square" data-cell="3"></div>
+              <div class="middle square" data-cell="4"></div>
+              <div class="middle right square" data-cell="5"></div>
+          </div>
+          <div class="row">
+              <div class="bottom left square" data-cell="6"></div>
+              <div class="bottom middle square" data-cell="7"></div>
+              <div class="bottom right square" data-cell="8"></div>
+          </div>
+        </div>
+      </main>
+        
+      <footer> 
+        <p class="copyright"> Copyright 2017</p>
+        <p class="message">Created with &hearts; by <span class="name">Kleide</span></p>
+      </footer>
+
+    </body>
+    
+</html>
