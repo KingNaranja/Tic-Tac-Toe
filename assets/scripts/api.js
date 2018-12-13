@@ -54,7 +54,7 @@ const changePassword = data => {
         headers: {
           Authorization: 'Token token=' + user.token
         },
-        moveData
+        data: moveData
       })
   }
 

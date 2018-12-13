@@ -53,7 +53,7 @@ const onSignOut = event => {
 // gameCount must keep track of how many times a new game is played
 // gameCount will be assigned to the current game ID
 // Initilized at 1 
-let gameCount = 0
+let gameCount = store.currentGame.id
 
 // Tic Tac Toe Engine 
 // helps handle game instances and API responses
@@ -71,11 +71,17 @@ class Game {
     newGame() {
         // each newGame call will increment the gameCount
         // player_ x by default is an empty object > form field method not done
-        gameCount++
-        store.currentGame = new Game(gameCount,false)
+        //gameCount++
+        // store.currentGame = new Game(gameCount,false)
 
         
-        api.createGame()  
+        api.createGame() 
+            // on success, make a new game object
+            .then((game)=>{
+                gameCount = game.game.id
+                store.currentGame = new Game(gameCount,false)
+
+            }) 
 
     }
 
@@ -259,8 +265,9 @@ const onPlayAgain = () => {
     // remove the 'gameOver' class to enable to gameboard
     $(".square").removeClass("gameOver")
 
-    // create a new game instance
+    // create a new game instance and increment game count 
     store.currentGame.newGame()
+    gameCount++
 
     // hide the 'play Again' button
     $("#playAgain").toggle("slow")
